@@ -56,4 +56,10 @@ dependencies {
 
     // Viewmodel
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Retrofit
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.logging.interceptor)
+
 }
