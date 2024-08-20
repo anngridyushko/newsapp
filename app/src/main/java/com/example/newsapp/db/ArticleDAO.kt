@@ -12,7 +12,7 @@ import com.example.newsapp.models.Article
 interface ArticleDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(article: Article): Long
+    suspend fun insertArticle(article: Article): Long
 
     @Delete
     suspend fun deleteArticle(article: Article)

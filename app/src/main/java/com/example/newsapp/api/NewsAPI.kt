@@ -10,22 +10,22 @@ interface NewsAPI {
 
     @GET("v2/top-headlines")
     suspend fun getNews(
-        @Query("apiKey")
-        apiKey: String = API_KEY,
         @Query("country")
         country: String = "pl",
         @Query("page")
         page: Int = 1,
+        @Query("apiKey")
+        apiKey: String = API_KEY,
     ): Response<NewsResponse>
 
     @GET("v2/everything")
     suspend fun searchNews(
-        @Query("apiKey")
-        apiKey: String = API_KEY,
         @Query("q")
         keywords: String,
         @Query("page")
         page: Int = 1,
+        @Query("apiKey")
+        apiKey: String = API_KEY,
     ): Response<NewsResponse>
 
 }
