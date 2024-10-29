@@ -25,7 +25,7 @@ class NewsAdapter(private val onItemClickListener: (Article) -> Unit) :
             oldItem == newItem
 
     }
-    private val diff = AsyncListDiffer(this, diffCallback)
+    val diff = AsyncListDiffer(this, diffCallback)
 
     inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.articleImage)
