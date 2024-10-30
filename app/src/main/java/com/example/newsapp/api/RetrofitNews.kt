@@ -1,5 +1,6 @@
 package com.example.newsapp.api
 
+import com.example.newsapp.util.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,6 +21,7 @@ class RetrofitNews {
 
             Retrofit
                 .Builder()
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

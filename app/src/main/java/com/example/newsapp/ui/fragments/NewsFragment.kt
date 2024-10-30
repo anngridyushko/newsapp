@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Button
 import android.widget.TextView
@@ -22,7 +23,7 @@ import com.example.newsapp.ui.NewsViewModel
 import com.example.newsapp.util.Constants
 import com.example.newsapp.util.ResourceStatus
 
-class NewsFragment : Fragment() {
+class NewsFragment : Fragment(R.layout.fragment_news) {
     lateinit var newsViewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
     lateinit var retryButton: Button

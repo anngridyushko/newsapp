@@ -15,7 +15,7 @@ import com.example.newsapp.ui.NewsActivity
 import com.example.newsapp.ui.NewsViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : Fragment(R.layout.fragment_favorite) {
     lateinit var newsViewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
     lateinit var binding: FragmentFavoriteBinding
