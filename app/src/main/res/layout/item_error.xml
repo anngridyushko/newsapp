@@ -28,6 +28,7 @@
             android:layout_margin="12dp"
             android:layout_weight="1"
             android:text="@string/retry"
+            android:backgroundTint="@color/primary_color"
             android:textAllCaps="false"
             android:textSize="20dp"
             app:cornerRadius="8dp" />

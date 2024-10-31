@@ -13,7 +13,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/carrois_gothic_sc"
         android:text="@string/news"
-        android:textColor="@color/purple"
+        android:textColor="@color/primary_color"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
