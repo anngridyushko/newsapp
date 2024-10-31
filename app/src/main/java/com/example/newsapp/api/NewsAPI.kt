@@ -1,6 +1,7 @@
 package com.example.newsapp.api
 
 import com.example.newsapp.models.NewsResponse
+import com.example.newsapp.util.Constants
 import com.example.newsapp.util.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -11,7 +12,7 @@ interface NewsAPI {
     @GET("v2/top-headlines")
     suspend fun getNews(
         @Query("country")
-        country: String = "pl",
+        country: String = Constants.COUNTRY_CODE,
         @Query("page")
         page: Int = 1,
         @Query("apiKey")
