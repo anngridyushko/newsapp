@@ -3,7 +3,6 @@ package com.example.newsapp.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 class FavoritesFragment : Fragment(R.layout.fragment_favorite) {
     lateinit var newsViewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
-    lateinit var binding: FragmentFavoriteBinding
+    private lateinit var binding: FragmentFavoriteBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,9 +55,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorite) {
             attachToRecyclerView(binding.recyclerFavourites)
         }
 
-        newsViewModel.getFavouriteNews().observe(viewLifecycleOwner, Observer { articles ->
+        newsViewModel.getFavouriteNews().observe(viewLifecycleOwner) { articles ->
             newsAdapter.diff.submitList(articles)
-        })
+        }
 
 
     }

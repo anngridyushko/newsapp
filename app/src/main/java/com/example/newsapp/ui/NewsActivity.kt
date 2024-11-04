@@ -14,7 +14,7 @@ import com.example.newsapp.repository.NewsRepo
 class NewsActivity : AppCompatActivity() {
 
     lateinit var newsViewModel: NewsViewModel
-    lateinit var binding: ActivityNewsBinding
+    private lateinit var binding: ActivityNewsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,7 @@ class NewsActivity : AppCompatActivity() {
         val newsRepo = NewsRepo(NewsDatabase.getInstance(this))
         val viewModelProviderFactory = NewsViewModelProviderFactory(application, newsRepo)
         newsViewModel =
-            ViewModelProvider(this, viewModelProviderFactory).get(NewsViewModel::class.java)
+            ViewModelProvider(this, viewModelProviderFactory)[NewsViewModel::class.java]
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.newsNavigation) as NavHostFragment

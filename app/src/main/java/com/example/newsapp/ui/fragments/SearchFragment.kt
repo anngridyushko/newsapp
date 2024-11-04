@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,10 +29,10 @@ import kotlinx.coroutines.launch
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
     lateinit var newsViewModel: NewsViewModel
-    lateinit var newsAdapter: NewsAdapter
-    lateinit var retryButton: Button
-    lateinit var errorText: TextView
-    lateinit var itemSearchError: CardView
+    private lateinit var newsAdapter: NewsAdapter
+    private lateinit var retryButton: Button
+    private lateinit var errorText: TextView
+    private lateinit var itemSearchError: CardView
     lateinit var binding: FragmentSearchBinding
 
     var isError = false
@@ -62,7 +61,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         isError = true
     }
 
-    val scrollListener = object : RecyclerView.OnScrollListener() {
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             val layoutManager = recyclerView.layoutManager as LinearLayoutManager
@@ -116,10 +115,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         val inflater =
             requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view: View = inflater.inflate(R.layout.item_error, null)
+        val errorView: View = inflater.inflate(R.layout.item_error, null)
 
-        retryButton = view.findViewById(R.id.retryButton)
-        errorText = view.findViewById(R.id.errorText)
+        retryButton = errorView.findViewById(R.id.retryButton)
+        errorText = errorView.findViewById(R.id.errorText)
 
         newsViewModel = (activity as NewsActivity).newsViewModel
         setupSearchRecycler()
@@ -138,7 +137,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         }
 
-        newsViewModel.search.observe(viewLifecycleOwner, Observer { response ->
+        newsViewModel.search.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is ResourceStatus.Success<*> -> {
                     hideProgressBar()
@@ -165,7 +164,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     showProgressBar()
                 }
             }
-        })
+        }
 
         retryButton.setOnClickListener {
             if (binding.searchEdit.text.toString().isNotEmpty()) {

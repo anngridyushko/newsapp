@@ -4,7 +4,7 @@ import com.example.newsapp.api.RetrofitNews
 import com.example.newsapp.db.NewsDatabase
 import com.example.newsapp.models.Article
 
-class NewsRepo(val db: NewsDatabase) {
+class NewsRepo(private val db: NewsDatabase) {
 
     suspend fun getNews(country: String, page: Int) =
         RetrofitNews.api.getNews(country, page)

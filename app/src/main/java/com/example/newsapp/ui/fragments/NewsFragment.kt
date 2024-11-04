@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,11 +24,11 @@ import com.example.newsapp.util.ResourceStatus
 
 class NewsFragment : Fragment(R.layout.fragment_news) {
     lateinit var newsViewModel: NewsViewModel
-    lateinit var newsAdapter: NewsAdapter
-    lateinit var retryButton: Button
-    lateinit var errorText: TextView
-    lateinit var itemNewsError: CardView
-    lateinit var binding: FragmentNewsBinding
+    private lateinit var newsAdapter: NewsAdapter
+    private lateinit var retryButton: Button
+    private lateinit var errorText: TextView
+    private lateinit var itemNewsError: CardView
+    private lateinit var binding: FragmentNewsBinding
 
     var isError = false
     var isLoading = false
@@ -111,15 +110,15 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
 
         val inflater =
             requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view: View = inflater.inflate(R.layout.item_error, null)
+        val errorView: View = inflater.inflate(R.layout.item_error, null)
 
-        retryButton = view.findViewById(R.id.retryButton)
-        errorText = view.findViewById(R.id.errorText)
+        retryButton = errorView.findViewById(R.id.retryButton)
+        errorText = errorView.findViewById(R.id.errorText)
 
         newsViewModel = (activity as NewsActivity).newsViewModel
         setupNewsRecycler()
 
-        newsViewModel.news.observe(viewLifecycleOwner, Observer { response ->
+        newsViewModel.news.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is ResourceStatus.Success<*> -> {
                     hideProgressBar()
@@ -146,7 +145,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
                     showProgressBar()
                 }
             }
-        })
+        }
 
         retryButton.setOnClickListener {
             newsViewModel.getNews(Constants.COUNTRY_CODE)

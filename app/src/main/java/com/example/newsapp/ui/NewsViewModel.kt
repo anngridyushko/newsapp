@@ -16,16 +16,16 @@ import kotlinx.coroutines.launch
 import okio.IOException
 import retrofit2.Response
 
-class NewsViewModel(app: Application, val newsRepo: NewsRepo) : AndroidViewModel(app) {
+class NewsViewModel(app: Application, private val newsRepo: NewsRepo) : AndroidViewModel(app) {
     val news: MutableLiveData<ResourceStatus<NewsResponse>> = MutableLiveData()
     var newsPage = 1
-    var newsResponse: NewsResponse? = null
+    private var newsResponse: NewsResponse? = null
 
     val search: MutableLiveData<ResourceStatus<NewsResponse>> = MutableLiveData()
-    var searchPage = 1
-    var searchResponse: NewsResponse? = null
-    var searchQuery: String? = null
-    var oldSearchQuery: String? = null
+    private var searchPage = 1
+    private var searchResponse: NewsResponse? = null
+    private var searchQuery: String? = null
+    private var oldSearchQuery: String? = null
 
     init {
         getNews(Constants.COUNTRY_CODE)
@@ -39,7 +39,7 @@ class NewsViewModel(app: Application, val newsRepo: NewsRepo) : AndroidViewModel
         searchInternet(searchQuery)
     }
 
-    fun internetConnection(context: Context): Boolean {
+    private fun internetConnection(context: Context): Boolean {
         (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).apply {
             return getNetworkCapabilities(activeNetwork)?.run {
                 when {
@@ -134,6 +134,5 @@ class NewsViewModel(app: Application, val newsRepo: NewsRepo) : AndroidViewModel
     }
 
     fun getFavouriteNews() = newsRepo.getFavoriteNews()
-
 
 }
